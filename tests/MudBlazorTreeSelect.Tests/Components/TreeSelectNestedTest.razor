@@ -1,0 +1,52 @@
+﻿@namespace MudBlazorTreeSelect.Tests.Components
+<MudPopoverProvider />
+
+@if (MultiSelection)
+{
+    <TreeSelect T="string" MultiSelection="true" SelectAll="true" @bind-SelectedValues="SelectedValues" InitiallyExpanded="@InitiallyExpanded" ExpandIconPlacement="@ExpandIconPlacement" TreeLines="@TreeLines" ExpandOnClick="@ExpandOnClick" SelectionOnEnter="@SelectionOnEnter" CheckedStrategy="@CheckedStrategy" Label="Category">
+        @Items
+    </TreeSelect>
+}
+else
+{
+    <TreeSelect T="string" @bind-Value="Value" InitiallyExpanded="@InitiallyExpanded" ExpandIconPlacement="@ExpandIconPlacement" TreeLines="@TreeLines" ExpandOnClick="@ExpandOnClick" SelectionOnEnter="@SelectionOnEnter" CheckedStrategy="@CheckedStrategy" Label="Category">
+        @Items
+    </TreeSelect>
+}
+
+@code {
+    public static string __description__ = "A select with a three-level tree of items.";
+
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public IReadOnlyCollection<string?>? SelectedValues { get; set; }
+    [Parameter] public bool MultiSelection { get; set; }
+    [Parameter] public bool InitiallyExpanded { get; set; }
+    [Parameter] public ExpandIconPlacement ExpandIconPlacement { get; set; } = ExpandIconPlacement.Start;
+    [Parameter] public bool TreeLines { get; set; } = true;
+    [Parameter] public bool ShowLaptops { get; set; } = true;
+    [Parameter] public bool DisableLaptops { get; set; }
+    [Parameter] public bool ExpandOnClick { get; set; }
+    [Parameter] public bool SelectionOnEnter { get; set; }
+    [Parameter] public CheckedStrategy CheckedStrategy { get; set; } = CheckedStrategy.All;
+
+    private RenderFragment Items =>
+        @<text>
+            <TreeSelectItem Value="@("electronics")">
+                <ChildContent>Electronics</ChildContent>
+                <NestedList>
+                    <TreeSelectItem Value="@("phones")">
+                        <ChildContent>Phones</ChildContent>
+                        <NestedList>
+                            <TreeSelectItem Value="@("smartphones")">Smartphones</TreeSelectItem>
+                            <TreeSelectItem Value="@("feature-phones")" Disabled="true">Feature phones</TreeSelectItem>
+                        </NestedList>
+                    </TreeSelectItem>
+                    @if (ShowLaptops)
+                    {
+                        <TreeSelectItem Value="@("laptops")" Disabled="@DisableLaptops">Laptops</TreeSelectItem>
+                    }
+                </NestedList>
+            </TreeSelectItem>
+            <TreeSelectItem Value="@("books")">Books</TreeSelectItem>
+        </text>;
+}

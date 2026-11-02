@@ -1,0 +1,19 @@
+﻿@namespace MudBlazorTreeSelect.Tests.Components
+<MudPopoverProvider />
+
+<TreeSelect T="string" @bind-Value="Value" Label="Category">
+    <TreeSelectItem Value="@("archive")" Disabled="true">
+        <ChildContent>Archive</ChildContent>
+        <NestedList>
+            <TreeSelectItem Value="@("old-docs")">Old docs</TreeSelectItem>
+            <TreeSelectItem Value="@("old-photos")">Old photos</TreeSelectItem>
+        </NestedList>
+    </TreeSelectItem>
+    <TreeSelectItem Value="@("current")">Current</TreeSelectItem>
+</TreeSelect>
+
+@code {
+    public static string __description__ = "A select whose first branch is disabled but still opens to show its children.";
+
+    [Parameter] public string? Value { get; set; }
+}

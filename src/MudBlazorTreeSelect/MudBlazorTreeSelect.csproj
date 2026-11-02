@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <RootNamespace>MudBlazorTreeSelect</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <PackageId>MudBlazorTreeSelect</PackageId>
+    <Version>0.1.1</Version>
+    <Description>A tree-style MudSelect with expandable nested items, extracted from MudBlazor pull request #14121.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SupportedPlatform Include="browser" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="MudBlazor" Version="9.12.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="MudBlazorTreeSelect.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="MudBlazor" />
+    <Using Include="MudBlazorTreeSelect.Internal" />
+  </ItemGroup>
+
+</Project>

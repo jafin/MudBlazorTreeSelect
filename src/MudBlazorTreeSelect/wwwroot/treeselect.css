@@ -1,0 +1,66 @@
+/*
+  Styles for TreeSelect. Add this file to your app once:
+  <link href="_content/MudBlazorTreeSelect/treeselect.css" rel="stylesheet" />
+*/
+
+/* An item with a nested list keeps its text on one side and the expand toggle at the inline end. */
+.treeselect-item-branch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.treeselect-item-branch-text {
+  min-width: 0;
+}
+
+.treeselect-item-toggle {
+  display: inline-flex;
+  flex: 0 0 auto;
+  cursor: pointer;
+  /* A disabled row blocks pointer events, but its children must stay reachable so the branch can still open. */
+  pointer-events: auto;
+}
+
+/* At the start the icon sits in the column reserved by the row's padding, so checkboxes and text line up whether or not a row can expand. */
+.treeselect-item-toggle-start {
+  position: absolute;
+  inset-inline-start: calc(1rem + var(--treeselect-level, 0) * 1.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Each guide is one indent step wide. Its line runs down the middle, which is where the parent's icon sits. */
+.treeselect-item-guide {
+  --treeselect-guide-color: var(--mud-palette-lines-default);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1.5rem;
+  inset-inline-start: calc(1rem + var(--treeselect-guide-column, 0) * 1.5rem);
+  pointer-events: none;
+}
+
+.treeselect-item-guide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  inset-inline-start: 0.75rem;
+  border-inline-start: 1px solid var(--treeselect-guide-color);
+}
+
+/* The elbow joins the row to its parent's line, and stops halfway down when the row is the last of its siblings. */
+.treeselect-item-guide-elbow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-start: 0.75rem;
+  inset-inline-end: 0;
+  border-block-start: 1px solid var(--treeselect-guide-color);
+}
+
+.treeselect-item-guide-elbow.treeselect-item-guide-last::before {
+  bottom: 50%;
+}

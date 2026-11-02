@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="src/MudBlazorTreeSelect/MudBlazorTreeSelect.csproj" />
+  <Project Path="tests/MudBlazorTreeSelect.Tests/MudBlazorTreeSelect.Tests.csproj" />
+  <Project Path="samples/TreeSelectDemo/TreeSelectDemo.csproj" />
+</Solution>

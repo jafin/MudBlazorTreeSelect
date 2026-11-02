@@ -1,0 +1,11 @@
+﻿@namespace MudBlazorTreeSelect.Tests.Components
+<MudPopoverProvider />
+
+<TreeSelect T="string" @bind-Value="Value" Label="Fruit">
+    <TreeSelectItem Value="@("apples")">Apples</TreeSelectItem>
+    <TreeSelectItem Value="@("bananas")">Bananas</TreeSelectItem>
+</TreeSelect>
+
+@code {
+    [Parameter] public string? Value { get; set; }
+}

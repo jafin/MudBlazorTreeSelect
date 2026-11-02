@@ -1,0 +1,223 @@
+﻿@page "/"
+
+<PageTitle>TreeSelect demo</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-2">TreeSelect</MudText>
+<MudText Class="mb-6">
+    A <code>MudSelect</code> with expandable nested items, used here from the <code>MudBlazorTreeSelect</code> package with the normal MudBlazor 9.12.0 package.
+    Use the switches in the app bar to check dark mode and right-to-left.
+</MudText>
+
+<MudGrid>
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">Single selection</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">A parent is selectable. Its chevron only expands or collapses it.</MudText>
+            <TreeSelect T="string" @bind-Value="_single" Label="Category" Variant="Variant.Outlined">
+                <TreeSelectItem Value="@("Electronics")">
+                    <ChildContent>Electronics</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Phones")">
+                            <ChildContent>Phones</ChildContent>
+                            <NestedList>
+                                <TreeSelectItem Value="@("Smartphones")">Smartphones</TreeSelectItem>
+                                <TreeSelectItem Value="@("Feature phones")">Feature phones</TreeSelectItem>
+                            </NestedList>
+                        </TreeSelectItem>
+                        <TreeSelectItem Value="@("Laptops")">Laptops</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+                <TreeSelectItem Value="@("Books")">
+                    <ChildContent>Books</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Fiction")">Fiction</TreeSelectItem>
+                        <TreeSelectItem Value="@("Non-fiction")">Non-fiction</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+                <TreeSelectItem Value="@("Garden")">Garden</TreeSelectItem>
+            </TreeSelect>
+            <MudText Typo="Typo.caption">Value: @_single</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">Multi-selection</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">Items are independent by default. Select all reaches collapsed branches.</MudText>
+            <TreeSelect T="string" @bind-SelectedValues="_multiple" Label="Departments" Variant="Variant.Outlined"
+                        MultiSelection="true" SelectAll="true" InitiallyExpanded="true">
+                <TreeSelectItem Value="@("Engineering")">
+                    <ChildContent>Engineering</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Platform")">Platform</TreeSelectItem>
+                        <TreeSelectItem Value="@("Mobile")">Mobile</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+                <TreeSelectItem Value="@("Sales")">
+                    <ChildContent>Sales</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Enterprise")">Enterprise</TreeSelectItem>
+                        <TreeSelectItem Value="@("Retail")">Retail</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+            </TreeSelect>
+            <MudText Typo="Typo.caption">Value: @string.Join(", ", _multiple)</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">Checked strategy</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">
+                <code>All</code> keeps items independent. <code>Child</code> reports only leaves. <code>Parent</code> reports the topmost fully checked parent.
+            </MudText>
+            <MudGrid>
+                <MudItem xs="12" md="4">
+                    <TreeSelect T="string" Label="All (default)" Variant="Variant.Outlined" MultiSelection="true" InitiallyExpanded="true"
+                                @bind-SelectedValues="_all" CheckedStrategy="CheckedStrategy.All">
+                        <TreeSelectItem Value="@("Fruit")">
+                            <ChildContent>Fruit</ChildContent>
+                            <NestedList>
+                                <TreeSelectItem Value="@("Apples")">Apples</TreeSelectItem>
+                                <TreeSelectItem Value="@("Bananas")">Bananas</TreeSelectItem>
+                            </NestedList>
+                        </TreeSelectItem>
+                        <TreeSelectItem Value="@("Dairy")">Dairy</TreeSelectItem>
+                    </TreeSelect>
+                    <MudText Typo="Typo.caption">Value: @string.Join(", ", _all)</MudText>
+                </MudItem>
+                <MudItem xs="12" md="4">
+                    <TreeSelect T="string" Label="Child" Variant="Variant.Outlined" MultiSelection="true" InitiallyExpanded="true"
+                                @bind-SelectedValues="_child" CheckedStrategy="CheckedStrategy.Child">
+                        <TreeSelectItem Value="@("Fruit")">
+                            <ChildContent>Fruit</ChildContent>
+                            <NestedList>
+                                <TreeSelectItem Value="@("Apples")">Apples</TreeSelectItem>
+                                <TreeSelectItem Value="@("Bananas")">Bananas</TreeSelectItem>
+                            </NestedList>
+                        </TreeSelectItem>
+                        <TreeSelectItem Value="@("Dairy")">Dairy</TreeSelectItem>
+                    </TreeSelect>
+                    <MudText Typo="Typo.caption">Value: @string.Join(", ", _child)</MudText>
+                </MudItem>
+                <MudItem xs="12" md="4">
+                    <TreeSelect T="string" Label="Parent" Variant="Variant.Outlined" MultiSelection="true" InitiallyExpanded="true"
+                                @bind-SelectedValues="_parent" CheckedStrategy="CheckedStrategy.Parent">
+                        <TreeSelectItem Value="@("Fruit")">
+                            <ChildContent>Fruit</ChildContent>
+                            <NestedList>
+                                <TreeSelectItem Value="@("Apples")">Apples</TreeSelectItem>
+                                <TreeSelectItem Value="@("Bananas")">Bananas</TreeSelectItem>
+                            </NestedList>
+                        </TreeSelectItem>
+                        <TreeSelectItem Value="@("Dairy")">Dairy</TreeSelectItem>
+                    </TreeSelect>
+                    <MudText Typo="Typo.caption">Value: @string.Join(", ", _parent)</MudText>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">Expand on click</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">A click on a parent expands it. With single selection only leaves can be chosen.</MudText>
+            <TreeSelect T="string" @bind-Value="_expandOnClick" Label="Single selection" Variant="Variant.Outlined" ExpandOnClick="true">
+                <TreeSelectItem Value="@("Fruit")">
+                    <ChildContent>Fruit</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Apples")">Apples</TreeSelectItem>
+                        <TreeSelectItem Value="@("Bananas")">Bananas</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+                <TreeSelectItem Value="@("Dairy")">Dairy</TreeSelectItem>
+            </TreeSelect>
+            <MudText Typo="Typo.caption">Value: @_expandOnClick</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">Appearance and a disabled branch</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">Chevron at the end and no tree lines. The disabled branch cannot be chosen but still opens.</MudText>
+            <TreeSelect T="string" @bind-Value="_plain" Label="End chevron, no lines" Variant="Variant.Outlined"
+                        ExpandIconPlacement="ExpandIconPlacement.End" TreeLines="false">
+                <TreeSelectItem Value="@("Archive")" Disabled="true">
+                    <ChildContent>Archive (only its items can be chosen)</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Reports")">Reports</TreeSelectItem>
+                        <TreeSelectItem Value="@("Invoices")">Invoices</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+                <TreeSelectItem Value="@("Current")">Current</TreeSelectItem>
+            </TreeSelect>
+            <MudText Typo="Typo.caption">Value: @_plain</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">Keyboard</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">Open the list and press Down to highlight an item, then Right expands and steps in, Left steps out, and Enter chooses. The two keys swap in RTL.</MudText>
+            <TreeSelect T="string" @bind-Value="_keyboard" Label="Try the arrow keys" Variant="Variant.Outlined" SelectionOnEnter="true">
+                <TreeSelectItem Value="@("Europe")">
+                    <ChildContent>Europe</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("France")">
+                            <ChildContent>France</ChildContent>
+                            <NestedList>
+                                <TreeSelectItem Value="@("Paris")">Paris</TreeSelectItem>
+                                <TreeSelectItem Value="@("Lyon")">Lyon</TreeSelectItem>
+                            </NestedList>
+                        </TreeSelectItem>
+                        <TreeSelectItem Value="@("Spain")">Spain</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+                <TreeSelectItem Value="@("Asia")">
+                    <ChildContent>Asia</ChildContent>
+                    <NestedList>
+                        <TreeSelectItem Value="@("Japan")">Japan</TreeSelectItem>
+                        <TreeSelectItem Value="@("India")">India</TreeSelectItem>
+                    </NestedList>
+                </TreeSelectItem>
+            </TreeSelect>
+            <MudText Typo="Typo.caption">Value: @_keyboard</MudText>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4">
+            <MudText Typo="Typo.h6">In a form</MudText>
+            <MudText Typo="Typo.body2" Class="mb-3">It is a normal input, so <code>Required</code> and <code>MudForm</code> validation work.</MudText>
+            <MudForm @ref="_form" @bind-IsValid="_formValid">
+                <TreeSelect T="string" @bind-Value="_required" Label="Required category" Variant="Variant.Outlined"
+                            Required="true" RequiredError="Pick a category">
+                    <TreeSelectItem Value="@("Fruit")">
+                        <ChildContent>Fruit</ChildContent>
+                        <NestedList>
+                            <TreeSelectItem Value="@("Apples")">Apples</TreeSelectItem>
+                            <TreeSelectItem Value="@("Bananas")">Bananas</TreeSelectItem>
+                        </NestedList>
+                    </TreeSelectItem>
+                    <TreeSelectItem Value="@("Dairy")">Dairy</TreeSelectItem>
+                </TreeSelect>
+            </MudForm>
+            <MudButton Class="mt-2" Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => _form.ValidateAsync())">Validate</MudButton>
+            <MudText Typo="Typo.caption" Class="ml-2">Form valid: @_formValid</MudText>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string? _single = "Smartphones";
+    private IReadOnlyCollection<string> _multiple = new HashSet<string>();
+    private IReadOnlyCollection<string> _all = new HashSet<string>();
+    private IReadOnlyCollection<string> _child = new HashSet<string>();
+    private IReadOnlyCollection<string> _parent = new HashSet<string>();
+    private string? _expandOnClick = "Dairy";
+    private string? _plain = "Current";
+    private string? _keyboard;
+    private string? _required;
+    private MudForm _form = null!;
+    private bool _formValid;
+}

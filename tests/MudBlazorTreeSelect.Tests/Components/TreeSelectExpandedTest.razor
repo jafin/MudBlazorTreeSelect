@@ -1,0 +1,29 @@
+﻿@namespace MudBlazorTreeSelect.Tests.Components
+<MudPopoverProvider />
+
+<TreeSelect T="string" @bind-Value="Value" Label="Category" Comparer="@StringComparer.OrdinalIgnoreCase">
+    <TreeSelectItem Value="@ElectronicsValue" @bind-Expanded="ElectronicsExpanded" @bind-Expanded:after="CountChange"
+                   ExpandLessIcon="@Icons.Material.Filled.Remove" ExpandMoreIcon="@Icons.Material.Filled.Add" ExpandIconColor="Color.Primary">
+        <ChildContent>Electronics</ChildContent>
+        <NestedList>
+            <TreeSelectItem Value="@("phones")">Phones</TreeSelectItem>
+            <TreeSelectItem Value="@("laptops")">Laptops</TreeSelectItem>
+        </NestedList>
+    </TreeSelectItem>
+    <TreeSelectItem Value="@("books")">Books</TreeSelectItem>
+</TreeSelect>
+
+@code {
+    public static string __description__ = "A select whose first branch binds Expanded and uses custom expand icons.";
+
+    [Parameter] public string? Value { get; set; }
+    [Parameter] public bool ElectronicsExpanded { get; set; }
+    [Parameter] public string ElectronicsValue { get; set; } = "electronics";
+
+    /// <summary>
+    /// How many times the select reported a change of <see cref="ElectronicsExpanded"/>.
+    /// </summary>
+    public int ChangeCount { get; private set; }
+
+    private void CountChange() => ChangeCount++;
+}

@@ -1,0 +1,11 @@
+﻿@namespace MudBlazorTreeSelect.Tests.Components
+<MudPopoverProvider />
+
+<TreeSelect T="string" MultiSelection="true" SelectAll="true" @bind-SelectedValues="SelectedValues" Label="Fruit">
+    <TreeSelectItem Value="@("apples")">Apples</TreeSelectItem>
+    <TreeSelectItem Value="@("bananas")">Bananas</TreeSelectItem>
+</TreeSelect>
+
+@code {
+    [Parameter] public IReadOnlyCollection<string?>? SelectedValues { get; set; }
+}
