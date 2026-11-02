@@ -1,8 +1,20 @@
 # MudBlazorTreeSelect
 
+> [!IMPORTANT]
+> **This library is temporary.** It only exists while our pull request to MudBlazor, [#14121](https://github.com/MudBlazor/MudBlazor/pull/14121), is not merged and released.
+> It is a stand-in, not a separate product: it will not gain features of its own, and it is not a long-term alternative to `MudSelect`.
+>
+> **When the pull request is merged and shipped in a MudBlazor release:**
+> 1. Move to that MudBlazor version and switch back to `MudSelect` and `MudSelectItem` (see [Migrating back to MudSelect](#migrating-back-to-mudselect)).
+> 2. This repository will be archived and the NuGet package marked deprecated.
+>
+> **If the pull request is closed without merging**, or merged in a different shape, this library stays as it is and is the only supported way to use the feature. In that case this notice will be updated.
+>
+> Check the pull request for its current status before adopting this.
+
 A tree-style `MudSelect` with expandable nested items, for use with the **normal MudBlazor NuGet package** (9.12.0 or later).
 
-It is a renamed copy of the nested-items feature from MudBlazor pull request [#14121](https://github.com/MudBlazor/MudBlazor/pull/14121) (issues [#11869](https://github.com/MudBlazor/MudBlazor/issues/11869) and [#8542](https://github.com/MudBlazor/MudBlazor/issues/8542)). It exists so the control can be used before that work ships in MudBlazor. Once it does, this library can be deleted (see [Migrating back to MudSelect](#migrating-back-to-mudselect)).
+It is a renamed copy of the nested-items feature from MudBlazor pull request [#14121](https://github.com/MudBlazor/MudBlazor/pull/14121) (issues [#11869](https://github.com/MudBlazor/MudBlazor/issues/11869) and [#8542](https://github.com/MudBlazor/MudBlazor/issues/8542)). It exists so the control can be used before that work ships in MudBlazor, and it should be removed once it does (see [Migrating back to MudSelect](#migrating-back-to-mudselect)).
 
 | This library | MudBlazor equivalent after the PR ships |
 | --- | --- |
