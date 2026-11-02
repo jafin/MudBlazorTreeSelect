@@ -1,0 +1,59 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-test:
+    name: Build and test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+
+      # The library multi-targets net8.0, net9.0 and net10.0, the tests and demo run on net10.0,
+      # and global.json asks for a .NET 10 SDK.
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: |
+            8.0.x
+            9.0.x
+            10.0.x
+          cache: true
+          cache-dependency-path: |
+            **/*.csproj
+            nuget.config
+
+      # The demo app installs MudBlazorTreeSelect from the local "artifacts" feed (see nuget.config),
+      # so the package has to exist before the solution is restored.
+      - name: Pack the library
+        run: dotnet pack src/MudBlazorTreeSelect/MudBlazorTreeSelect.csproj -c Release -o artifacts
+
+      - name: Restore
+        run: dotnet restore MudBlazorTreeSelect.slnx
+
+      - name: Build
+        run: dotnet build MudBlazorTreeSelect.slnx -c Release --no-restore
+
+      - name: Test
+        run: dotnet test --project tests/MudBlazorTreeSelect.Tests/MudBlazorTreeSelect.Tests.csproj -c Release --no-build -- --output Normal --no-ansi
+
+      - name: Upload the package
+        uses: actions/upload-artifact@v4
+        with:
+          name: MudBlazorTreeSelect-package
+          path: artifacts/*.nupkg
+          if-no-files-found: error

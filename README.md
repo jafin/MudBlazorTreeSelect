@@ -150,4 +150,4 @@ The sources under `src/MudBlazorTreeSelect` were generated from MudBlazor's `Com
 
 ## License
 
-MIT. This is derived from MudBlazor, so MudBlazor's license and copyright notice apply. See `LICENSE-MudBlazor.txt`.
+MIT, see [LICENSE](LICENSE). This is derived from MudBlazor, so MudBlazor's copyright notice is kept alongside the author's.
